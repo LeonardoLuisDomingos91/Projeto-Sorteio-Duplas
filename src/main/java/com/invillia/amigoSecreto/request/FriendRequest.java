@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class FriendRequest {
 
-
     private String name;
     private Integer age;
 

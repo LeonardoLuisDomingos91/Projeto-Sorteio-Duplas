@@ -27,8 +27,7 @@ public class FriendService {
     @Transactional
     public void save(FriendRequest friendRequest) {
         Friend friend = friendMapper.adapterFriend(friendRequest);
-        Optional<Friend> friend2 = friendRepository.findById(friend.getId());
-        friendRepository.save(friend2.get());
+        friendRepository.save(friend);
     }
 
     public Friend update(FriendUpdateRequest friendUpdateRequest, long id) {
