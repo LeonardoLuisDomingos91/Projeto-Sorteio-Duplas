@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FriendService {
@@ -24,24 +25,25 @@ public class FriendService {
     private FriendMapper friendMapper;
 
     @Transactional
-    public void save(FriendRequest friendRequest){
+    public void save(FriendRequest friendRequest) {
         Friend friend = friendMapper.adapterFriend(friendRequest);
-        friendRepository.save(friend);
+        Optional<Friend> friend2 = friendRepository.findById(friend.getId());
+        friendRepository.save(friend2.get());
     }
 
-    public Friend update(FriendUpdateRequest friendUpdateRequest,long id){
-        Friend friendExist = friendRepository.findById(id).orElseThrow(()-> new FriendNotContracted("Freind Not found"));
-        Friend friend = friendMapper.update(friendUpdateRequest,friendExist);
+    public Friend update(FriendUpdateRequest friendUpdateRequest, long id) {
+        Friend friendExist = friendRepository.findById(id).orElseThrow(() -> new FriendNotContracted("Freind Not found"));
+        Friend friend = friendMapper.update(friendUpdateRequest, friendExist);
         friendRepository.save(friend);
         return friend;
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         friendRepository.deleteById(id);
     }
 
-    public FriendResponse findAllId(Long id){
-        Friend friendAll = friendRepository.findById(id).orElseThrow(()-> new FriendNotContracted("Freind Not found"));
+    public FriendResponse findAllId(Long id) {
+        Friend friendAll = friendRepository.findById(id).orElseThrow(() -> new FriendNotContracted("Freind Not found"));
         FriendResponse fr = friendMapper.findAllFriendId(friendAll);
 
         return fr;
@@ -52,23 +54,23 @@ public class FriendService {
         return friendMapper.findAll(friends);
     }
 
-    public Friend listName(String name){
+    public Friend listName(String name) {
 
         return friendRepository.findByName(name);
     }
 
-    public List<Friend> buscar(){
+    public List<Friend> buscar() {
         List<Friend> friendList = friendRepository.findAll();
         return friendList;
     }
 
-    public List<Friend> ordenaListaPorId(){
+    public List<Friend> ordenaListaPorId() {
         List<Friend> list = buscar();
 
         list.sort(new Comparator<Friend>() {
             @Override
             public int compare(Friend friend1, Friend friend2) {
-                return Long.compare(friend1.getId(),friend2.getId());
+                return Long.compare(friend1.getId(), friend2.getId());
             }
         });
         return list;

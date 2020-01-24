@@ -5,12 +5,12 @@ import com.invillia.amigoSecreto.domain.DoublesFriends;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoubleFriendsRequest  {
+public class DoubleFriendsRequest {
 
     private String mensagem;
     private List<DoublesFriends> listaAmigos;
 
-    public DoubleFriendsRequest(){
+    public DoubleFriendsRequest() {
         this.listaAmigos = new ArrayList<DoublesFriends>();
     }
 

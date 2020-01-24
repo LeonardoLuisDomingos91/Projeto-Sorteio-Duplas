@@ -24,37 +24,37 @@ public class friendControler {
     private DrawService drawService;
 
     @PostMapping
-    public ResponseEntity save(@RequestBody FriendRequest friendRequest){
+    public ResponseEntity save(@RequestBody FriendRequest friendRequest) {
         friendService.save(friendRequest);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody FriendUpdateRequest friendUpdateRequest, @PathVariable Long id){
+    public ResponseEntity update(@RequestBody FriendUpdateRequest friendUpdateRequest, @PathVariable Long id) {
 
-        Friend friendUpdate = friendService.update(friendUpdateRequest,id);
-        return new ResponseEntity(friendUpdate,HttpStatus.OK);
+        Friend friendUpdate = friendService.update(friendUpdateRequest, id);
+        return new ResponseEntity(friendUpdate, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id) {
         friendService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public FriendResponse findAllId(@PathVariable Long id){
+    public FriendResponse findAllId(@PathVariable Long id) {
         FriendResponse friendResponse = friendService.findAllId(id);
         return friendResponse;
     }
 
     @GetMapping
-    public List<FriendResponse> findAll(){
+    public List<FriendResponse> findAll() {
         return friendService.findAll();
     }
 
     @GetMapping("/name")
-    public Friend findAllName(@RequestParam String name){
+    public Friend findAllName(@RequestParam String name) {
         return friendService.listName(name);
     }
 

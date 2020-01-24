@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class FriendResponse {
 
+    private Long id;
     private String name;
     private Integer age;
-
     public FriendResponse() {
     }
 
@@ -25,5 +25,13 @@ public class FriendResponse {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
